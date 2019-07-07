@@ -212,8 +212,8 @@ io.on('connection', function (client) {
 
 // Performnas testi için yapay mesajlar
 const msj = [
-  'Reprehenderit harum quam dicta debitis',
-  'Eius dolorum incidunt consequuntur labor',
+  'Reprehenderit harum quam dicta debitis Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, animi nulla laboriosam, qui sit dolores temporibus aspernatur ducimus voluptate iste, nostrum sequi. Earum optio ipsum, cupiditate omnis voluptates facilis exercitationem.',
+  'Eius dolorum incidunt consequuntur labor ',
   'Lorem ipsum dolor sit amet consectetur a',
   'Lorem ipsum dolor sit amet consectetur'
 ]

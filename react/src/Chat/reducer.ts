@@ -71,7 +71,7 @@ export function ChatSystemReducer(
         rooms[roomName] = { message: '' };
       else rooms[roomName] = state.rooms[roomName];
 
-      rooms[roomName].message += `【 ${nick} 】: ${message}\n`;
+      rooms[roomName].message += `[${nick}]: ${message}\n`;
 
       if (rooms[roomName].message.length > maxString) {
         rooms[roomName].message = rooms[roomName].message.substr(

@@ -51,8 +51,9 @@ function ChatTextBody(props: IProps) {
           overflowY: 'scroll',
           overflowX: 'hidden',
           border: 'none',
-          fontFamily: 'monaco'
-
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+          fontSize:'14px',
+          lineHeight:'24px'
         }}
       ></textarea>
     </div>
