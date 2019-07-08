@@ -60,5 +60,4 @@ class ListOfUsersInRooms {
       return this.list.hasOwnProperty(roomName);
    };
 }
-
-module.exports = ListOfUsersInRooms
+exports.ListOfUsersInRooms = ListOfUsersInRooms
