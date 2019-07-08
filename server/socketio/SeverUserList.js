@@ -1,3 +1,8 @@
+/**
+ * LIST DATA STRUCTURE
+ *
+ * list = [client1.nick, client2.nick client3.nick]
+*/
 class SeverUserList {
    constructor() {
       this.list = [];
