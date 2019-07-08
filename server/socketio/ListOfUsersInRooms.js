@@ -1,3 +1,12 @@
+/**
+ * LIST DATA STRUCTURE
+list = {
+   'RoomName1' : [client1.nick, client2.nick client3.nick],
+   'RoomName2' : [client1.nick, client2.nick client3.nick],
+   'RoomName3' : [client1.nick, client2.nick client3.nick],
+}
+*/
+
 class ListOfUsersInRooms {
    constructor() {
       this.list = {}
