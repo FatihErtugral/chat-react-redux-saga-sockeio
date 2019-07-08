@@ -1,234 +1,329 @@
-*{
-  box-sizing: border-box;
+* {
+   box-sizing: border-box;
 }
 
-/* SCROLL BAR BEGIN */
-::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #00000070;
+body,
+html,
+#root {
+   height: 100%;
+   width: 100%;
 }
-
-::-webkit-scrollbar-button {
-  width: 0;
-  height:0;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ffffff70;;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ffffff90;
-}
-
-::-webkit-scrollbar-thumb:active {
-  background: #ffffff95;
-}
-
-::-webkit-scrollbar-track {
-  border:1px solid #444444;
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-/* SCROLL BAR END */
 
 body {
-  color: #cccccc;
-  background-color: rgb(51, 51, 51);
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  scrollbar-width: none;
-  scrollbar-face-color: aqua;
-  scrollbar-shadow-color: #000;
-
+   color: #cccccc;
+   background-color: rgb(51, 51, 51);
+   padding: 0;
+   margin: 0;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   scrollbar-shadow-color: #000;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .App {
-  font-family: sans-serif;
+   font-family: sans-serif;
 }
 
-/* SPLIT PANE BEGIN */
+main {
+   display: flex;
+   flex-direction: column-reverse;
+   height: 100%;
+   width: 100%;
+}
+
+/*#region SCROLL BAR BEGIN */
+::-webkit-scrollbar {
+   width: 14px;
+   height: 14px;
+   background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-button {
+   width: 0;
+   height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+   background: #ffffff70;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: #ffffff60;
+}
+
+::-webkit-scrollbar-thumb:active {
+   background: #ffffff95;
+}
+
+/* ::-webkit-scrollbar-track {
+  border:1px solid #444444;
+} */
+
+/* ::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track-piece{
+  background: transparent;
+}
+::-webkit-scrollbar-corner{
+  background: transparent;
+}
+::-webkit-resizer{
+  background: transparent;
+} */
+/*#endregion SCROLL BAR END */
+
+/*#region SPLIT PANE BEGIN */
 .Resizer {
-  background: black;
-  z-index: 1!important;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding;
-  background-clip: padding-box;
+   background: black;
+   z-index: 1 !important;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding;
+   background-clip: padding-box;
 }
 
 .Resizer:hover {
-  -webkit-transition: all 1s ease;
-  transition: all 1s ease;
+   -webkit-transition: all 1s ease;
+   transition: all 1s ease;
 }
 
 .Resizer.horizontal {
-  min-height: 7px;
-  width: 100%;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  cursor: row-resize;
+   min-height: 7px;
+   width: 100%;
+   border-top: 3px solid transparent;
+   border-bottom: 3px solid transparent;
+   cursor: row-resize;
 }
 
 .Resizer.horizontal:hover {
-  background-color: #FFFFFF;
-  opacity: unset;
+   background-color: #FFFFFF;
+   opacity: unset;
 }
 
 .Resizer.vertical {
-  height: 100%;
-  width: 7px;
-  margin: 0 -4px 0 -3px;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  cursor: col-resize;
+   height: 100%;
+   width: 7px;
+   margin: 0 -4px 0 -3px;
+   border-left: 3px solid transparent;
+   border-right: 3px solid transparent;
+   cursor: col-resize;
 }
 
 .Resizer.vertical:hover {
-  background-color: #FFFFFF;
-  opacity: unset;
+   background-color: #FFFFFF;
+   opacity: unset;
 }
 
 .Resizer.disabled {
-  cursor: not-allowed;
+   cursor: not-allowed;
 }
 
 .Resizer.disabled:hover {
-  border-color: transparent;
-}
-/* SPLIT PANE END */
-
-
-/* INPUT CHAT BEGİN */
-#message-to-send {
-  width: 95%;
-  position: absolute;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 20px;
-  font: 14px "Lato", Arial, sans-serif;
-  line-height: 30px;
-  left: 0 ;
-  right: 0;
-  margin: auto;
-  padding: 0 5px;
-  border-radius: 5px;
-  resize: none;
-  white-space: nowrap;
+   border-color: transparent;
 }
 
-.room-list{
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  background-color: rgb(37, 37, 38);
-  /* background-color: rgb(23, 23, 187) !important; */
+/*#endregion SPLIT PANE END */
+
+/*#region INPUT CHAT BEGİN */
+#chat-text-input {
+   width: 95%;
+   position: absolute;
+   box-sizing: border-box;
+   height: 40px;
+   padding: 10px 20px;
+   font: 14px "Lato", Arial, sans-serif;
+   line-height: 30px;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+   padding: 0 5px;
+   border-radius: 5px;
+   resize: none;
+   white-space: nowrap;
 }
 
-.room-list-header{
-  white-space: normal;
-  position: relative;
-  box-sizing: border-box;
-  user-select: none;
-  width: 100%;
-  height: 22px;
-  line-height: 22px;
-  background-color: rgba(128, 128, 128);
-  font-size: 11px;
-  font-weight: 700;
-  padding-left: 20px;
-  overflow: hidden;
-  cursor: default;
-  white-space: normal;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
+/*#endregion INPUT CHAT END */
+
+/*#region STATUSBAR BEGIN */
+#statusbar {
+   position: relative;
+   /* background-color: rgb(0, 122, 204); */
+   background-color: #eeeeee;
+   color: #1e1e1e;
+   /* background-color: darkslategray; */
+   /* color: rgb(255, 255, 255); */
+   box-sizing: border-box;
+   cursor: default;
+   height: 24px;
+   width: 100%;
+   line-height: 22px;
+   font-size: 13px;
+   font-weight: bold;
+   user-select: none;
 }
 
-.room-list-header > h5 {
-  text-overflow: ellipsis;
-  font-size: 13px;
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
+.statusbar-item {
+   display: inline-block;
+   height: 100%;
+   vertical-align: middle;
+   margin: 0 0px;
+   padding: 0 20px;
 }
-.room-list-body{
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
+
+#connect{
+   position: relative;
+}
+
+#ex-circle {
+   position: absolute;
+   display: inline-block;
+   height: 12px;
+   width: 12px;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   background-color: #000;
+   border-radius: 50%;
+}
+
+#circle {
+   position: absolute;
+   height: 8px;
+   width: 8px;
+   border-radius: 50%;
+   left: 0;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+}
+
+/*#endregion STATUSBAR END */
+
+/*#region ROOMS LIST BEGIN */
+
+.room-list {
+   width: 100%;
+   height: 100%;
+   position: relative;
+   overflow: hidden;
+   background-color: rgb(37, 37, 38);
+   /* background-color: rgb(23, 23, 187) !important; */
+}
+
+.room-list-header {
+   white-space: normal;
+   position: relative;
+   box-sizing: border-box;
+   user-select: none;
+   width: 100%;
+   height: 22px;
+   line-height: 22px;
+   background-color: #232323;
+   /* background-color: rgba(128, 128, 128); */
+   font-size: 11px;
+   font-weight: 700;
+   padding-left: 20px;
+   overflow: hidden;
+   cursor: default;
+   white-space: normal;
+   text-overflow: ellipsis;
+   word-wrap: break-word;
+}
+
+.room-list-header>h5 {
+   text-overflow: ellipsis;
+   font-size: 13px;
+   -webkit-margin-before: 0;
+   -webkit-margin-after: 0;
+   color: #cccccc;
+}
+
+.room-list-body {
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+}
+
+.room-list-body:hover {
+   overflow-y: scroll;
 }
 
 .room-list-body::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.room-list-element{
-  display:block;
-  width:100%;
-  height:auto;
-  line-height: 22px;
-  padding-left: 20px;
-  font-size: 13px;
-  color: #b7c1c6;
-  background-color: #2a2a2a ;
-  cursor: pointer;
-  user-select: none;
-  word-wrap: break-word;
-  white-space: nowrap;
+   width: 10px;
+   height: 10px;
+   background: transparent !important;
 }
 
-/* INPUT CHAT END */
-
-/* STATUSBAR BEGIN */
-.statusbar{
-  background-color: rgb(0, 122, 204);
-  color: rgb(255, 255, 255);
-  position: relative;
-  box-sizing: border-box;
-  cursor: default;
-  width: 100%;
-  height: 22px;
-  font-size: 12px;
-  line-height: 1.4em;
-  user-select: none;
+.room-list-body::-webkit-scrollbar-track {
+   background: transparent;
+   border: none;
 }
 
-.statusbar-item{
-  display: inline-block;
-  line-height: 22px;
-  height: 100%;
-  vertical-align: top;
-  padding: 0 7px;
+.room-list-element {
+   display: block;
+   width: 100%;
+   height: auto;
+   line-height: 22px;
+   padding-left: 20px;
+   font-size: 13px;
+   /* color: #b7c1c6; */
+   color: #c586c0;
+   background-color: #2a2a2a;
+   cursor: pointer;
+   user-select: none;
+   word-wrap: break-word;
+   white-space: nowrap;
 }
-.ex-circle{
-  position: relative;
-  display: inline-block;
-  height: 12px;
-  width: 12px;
-  background-color: #000;
-  border-radius: 50%;
+
+.room-list-element.active {
+   background-color: #3A3A3F;
+   color: yellow;
+   /* background-color: red; */
 }
-.circle{
-  position: absolute;
-  height: 8px;
-  width: 8px;
-  background-color: #bbb;
-  border-radius: 50%;
-  left: 0;
-  right: 0;
-  top:0;
-  bottom: 0;
-  margin: auto;
+
+.room-list-element:hover {
+   background-color: #2E3132;
 }
-/* STATUSBAR END */
+
+/*#endregion ROOMS LIST END */
+
+/*#region CHAT TEXT AREA BEGIN  */
+.chat-text-area {
+   position: absolute;
+   height: calc(100% - 40px);
+   width: 100%;
+   top: 0;
+}
+
+.chat-text {
+   position: absolute;
+   margin: 0;
+   padding: 20px;
+   background-color: #333333;
+   color: #eeeeee;
+   width: 100%;
+   height: 100%;
+   border: none;
+   line-height: 20px;
+   font-size: 14px;
+   overflow: hidden;
+   overflow-y: scroll;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+/*#endregion CHAT TEXT AREA END */
+
+
+.chat-main-layer {
+   position: relative;
+   width: 100%;
+   height: calc(100% - 22px);
+   background: #272727;
+   color: red;
+}

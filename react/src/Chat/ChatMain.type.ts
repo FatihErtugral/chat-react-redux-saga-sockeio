@@ -10,7 +10,7 @@ export interface IChatState {
   id: string;
   nick: string;
   ping: number;
-  channelList: {
+  listOfUsersInRoom: {
     [key: string]: [];
   };
   userList?: string[];
@@ -21,7 +21,7 @@ export interface IChatState {
       message: string;
     };
   };
-  focusRoom: string;
+  activeRoom: string;
   connect: 'Connected' | 'Disconnected';
 }
 

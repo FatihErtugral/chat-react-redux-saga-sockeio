@@ -10,11 +10,22 @@ function ChatTextBody(props: IProps) {
   const { text } = props;
   const [scrollBott, setscrollBott] = useState<boolean>(true);
   const [txt, setTxt] = useState<string>('');
-  const elementRef = useRef<HTMLTextAreaElement>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(()=>{
+    let textBody = elementRef.current;
+    textBody
+    && textBody.addEventListener('scroll',handleScroll);
+    return () => {
+      textBody
+      && textBody.removeEventListener('scroll',handleScroll);
+    }
+  })
 
   useEffect((): any => {
     setTxt(text);
   }, [text]);
+
   useEffect((): any => {
     if (scrollBott) {
       let x = elementRef.current;
@@ -22,40 +33,25 @@ function ChatTextBody(props: IProps) {
     }
   });
 
-  const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+  const handleScroll = (e: Event):any => {
     e.preventDefault();
-    const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
-    if (scrollTop + clientHeight + scrollHeight / 400 >= scrollHeight)
-      setscrollBott(true);
-    else setscrollBott(false);
+
+    if (e.target) {
+      const { scrollTop, clientHeight, scrollHeight }:any = e.target;
+      if (scrollTop + clientHeight + scrollHeight / 400 >= scrollHeight)
+        setscrollBott(true);
+      else setscrollBott(false);
+    }
   };
 
   return (
-    <div style={{position:'relative', height: 'calc(100% - 40px'}}>
-      <textarea
-        readOnly={true}
-        onScroll={handleScroll}
-        value={txt}
+    <div className="chat-text-area">
+      <div
+        className = "chat-text"
         ref={elementRef}
-        style={{
-          boxSizing:'border-box',
-          position:'absolute',
-          margin: '0',
-          padding: '10px',
-          scrollSnapType: 'both proximity',
-          backgroundColor: '#1e1e1e',
-          color: '#cccccc',
-          resize: 'none',
-          width: '100%',
-          height: '100%',
-          overflowY: 'scroll',
-          overflowX: 'hidden',
-          border: 'none',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-          fontSize:'14px',
-          lineHeight:'24px'
-        }}
-      ></textarea>
+        dangerouslySetInnerHTML={{__html:txt}}
+      >
+      </div>
     </div>
   );
 }

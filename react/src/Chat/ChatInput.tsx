@@ -7,12 +7,13 @@ import {
   IChatInputOwnProps
 } from './ChatInput.type';
 import { IMessageDetail } from './ChatMain.type';
+import { IStore } from './reducer';
 
 type IProps = IChatInputState & IChatInputDispatch & IChatInputOwnProps;
 
 function ChatInput(props: IProps) {
   const {
-    focusRoom,
+    activeRoom,
     joinChannel,
     leaveChannel,
     selectRoom,
@@ -56,12 +57,13 @@ function ChatInput(props: IProps) {
             leaveChannel(str);
             return;
           case '/clear':
+            // TODO daha fazla komut eklenebilir...
             return;
         }
       }
 
       let messageData: IMessageDetail = {
-        roomName: focusRoom,
+        roomName: activeRoom,
         nick: nick,
         message: value
       };
@@ -72,17 +74,14 @@ function ChatInput(props: IProps) {
 
   return (
     <input
-      name="message-to-send"
+      name="chat-text-input"
       onKeyDown={onEnterKey}
-      id="message-to-send"
+      id="chat-text-input"
     />
   );
 }
 
-const mapStoreToProps = ({ input }: any, ownProps: IChatInputOwnProps) => {
-  const { sendMessage, focusRoom, nick, selectRoom } = ownProps;
-  return { focusRoom, sendMessage, nick, selectRoom };
-};
+const mapStoreToProps = ({ chatInput }: IStore, ownProps: IChatInputOwnProps):IChatInputOwnProps => ({ ...ownProps });
 
 export default connect(
   mapStoreToProps,

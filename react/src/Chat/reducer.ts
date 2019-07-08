@@ -13,16 +13,16 @@ import {
   CONNECT_SAGA_PUT
 } from './constants';
 
-export const initStateChatSystem: IChatState = {
+const initStateChatSystem: IChatState = {
   id: '',
   nick: '',
   ping: 0,
-  channelList: {},
+  listOfUsersInRoom: {},
   isNickUnique: false,
   userList: [],
   nickWarning: '',
   rooms: {},
-  focusRoom: '',
+  activeRoom: '',
   connect: 'Disconnected',
 };
 
@@ -34,34 +34,30 @@ export function ChatSystemReducer(
   const newState = Object.assign({}, state);
   switch (action.type) {
     case PING_SAGA_WATCH:
-      // return Object.assign({}, state, { ping: action.payload });
       newState.ping = action.payload
       return newState;
 
     case CONNECT_SAGA_PUT:
-      console.log(action);
-      // return Object.assign({}, state, { connect: action.payload })
       newState.connect = action.payload;
       return newState;
 
     case SET_NICK_SAGA_EVENT:
     case JOIN_ROOM_SAGA_EVENT:
-
-
       return Object.assign({}, state, action.payload);
 
-    case LEAVED_ROOM_SAGA_EVENT:
-      console.log(action.payload);
+    case LEAVED_ROOM_SAGA_EVENT: {
       const room = action.payload;
-      let temp = state.channelList
-      delete temp[room];
-      return { ...state, ...{ channelList: { ...temp } } };
+      delete  newState.listOfUsersInRoom[room];
+      newState.activeRoom = Object.keys(newState.listOfUsersInRoom)[0];
+      return { ...newState };
+    }
 
     case SELECT_ROOM:{
-      newState.focusRoom = action.payload;
+      newState.activeRoom = action.payload;
       // console.log('ACTION SELECT_ROOM', action.payload);
       return newState;
     }
+
     case MESSAGE_SAGA_EVENT: {
       const maxString = 10000;
       const { roomName, message, nick } = action.payload;
@@ -71,7 +67,8 @@ export function ChatSystemReducer(
         rooms[roomName] = { message: '' };
       else rooms[roomName] = state.rooms[roomName];
 
-      rooms[roomName].message += `[${nick}]: ${message}\n`;
+      rooms[roomName].message += `<p><a><strong style="color:rgb(78, 201, 176)
+      ; ">${nick}:</strong></a> ${message}</p>`;
 
       if (rooms[roomName].message.length > maxString) {
         rooms[roomName].message = rooms[roomName].message.substr(
@@ -83,22 +80,22 @@ export function ChatSystemReducer(
         rooms: Object.assign({}, state.rooms, rooms)
       });
     }
-    case ROOM_USER_LIST_SAGA_EVENT:
 
-      newState.channelList = Object.assign({}, state.channelList, action.payload);
+    case ROOM_USER_LIST_SAGA_EVENT:{
+      newState.listOfUsersInRoom = Object.assign({}, state.listOfUsersInRoom, action.payload);
 
       // sort object room
-      let oldListtarr = Object.keys(newState.channelList).sort();
-      let oldListObj = newState.channelList;
-      newState.channelList = {};
-      for (let i = 0; i < oldListtarr.length; i++) {
-        newState.channelList[oldListtarr[i]] = oldListObj[oldListtarr[i]];
-      }
+      let oldListtarr = Object.keys(newState.listOfUsersInRoom).sort();
+      let oldListObj = newState.listOfUsersInRoom;
+      newState.listOfUsersInRoom = {};
+      for (let i = 0; i < oldListtarr.length; i++)
+        newState.listOfUsersInRoom[oldListtarr[i]] = oldListObj[oldListtarr[i]];
 
-      // ilk kanalı foculuyor
-      if (newState.focusRoom === '')
-        newState.focusRoom= Object.keys(action.payload)[0];
+      // select first room
+      if (newState.activeRoom === '')
+      newState.activeRoom= Object.keys(action.payload)[0];
       return newState;
+    }
 
     default:
       return state;
@@ -116,12 +113,12 @@ export function ChatInputReducer(
   }
 }
 
-interface ChatState {
-  chat: IChatState;
-  input: IChatInputState;
+export interface IStore {
+  chatMain: IChatState;
+  chatInput: IChatInputState;
 }
 
-export const chatReducer = combineReducers<ChatState>({
-  chat: ChatSystemReducer,
-  input: ChatInputReducer
+export const chatReducer = combineReducers<IStore>({
+  chatMain: ChatSystemReducer,
+  chatInput: ChatInputReducer
 });

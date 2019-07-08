@@ -6,6 +6,8 @@ import SplitPane from 'react-split-pane';
 
 import ChatInput from './ChatInput';
 import TextBody from './ChatTextBody';
+import { IStore } from './reducer';
+import StatusBar from './StatusBar';
 
 type IProps = IChatState & IChatDispatch;
 const stylePane: React.CSSProperties = { overflowX: 'hidden', minHeight: '0' };
@@ -15,15 +17,14 @@ class ChatMain extends Component<IProps> {
     const {
       ping,
       nick,
-      id,
       connect,
       sendMessage,
       isNickUnique,
       nickWarning,
       rooms,
-      focusRoom,
+      activeRoom,
       selectRoom,
-      channelList
+      listOfUsersInRoom
     } = this.props;
 
     const selectChannel = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -31,35 +32,9 @@ class ChatMain extends Component<IProps> {
       selectRoom(value);
     };
     return (
-      <div>
+      <main >
 
-        <div className="statusbar">
-          <span className="statusbar-item">Nick: {nick}</span>
-          <span className="statusbar-item">id: {id}</span>
-          <span className="statusbar-item" style={{float:"right"}}>
-          {connect}&nbsp;&nbsp;&nbsp;
-          <i className="ex-circle">
-
-          {connect === 'Connected'
-            ?<i style={{backgroundColor:'#1F813E'}} className="circle"></i>
-            :<i style={{backgroundColor:'darkred'}} className="circle"></i>
-          }
-          </i>
-          </span>
-          <span className="statusbar-item" style={{float:"right"}}>Ping : {ping}ms</span>
-          {isNickUnique ? '' : <>{nickWarning}</>}
-        </div>
-        <div
-          style={{
-            height: '92vh',
-            margin: '10px',
-            width: 'calc(100%-20px)',
-            position: 'relative',
-            border: '1px solid black',
-            background: '#272727',
-            color: 'white'
-          }}
-        >
+        <div className="chat-main-layer">
           <SplitPane
             split="vertical"
             minSize={12}
@@ -80,11 +55,11 @@ class ChatMain extends Component<IProps> {
                 <h5 className="title" title="ODA LİSTESİ">ODA LİSTESİ</h5>
               </div>
               <div className='room-list-body'>
-                {channelList &&
-                  Object.keys(channelList).map(key => (
+                {listOfUsersInRoom &&
+                  Object.keys(listOfUsersInRoom).map(key => (
                       <span
                         key={key}
-                        className="room-list-element"
+                        className={`room-list-element ${activeRoom === key ? 'active': ''}`}
                         data-name={key}
                         onClick={selectChannel}
                       >
@@ -102,58 +77,40 @@ class ChatMain extends Component<IProps> {
               defaultSize={120}
               primary="second"
             >
-              <div style={{backgroundColor:'white' ,height: '100%',width:'100%', position:'relative'}}>
+              <div>
                 <TextBody
                   text={
-                    (rooms && rooms[focusRoom] && rooms[focusRoom].message) ||
+                    (rooms && rooms[activeRoom] && rooms[activeRoom].message) ||
                     ''
                   }
                 />
                 <ChatInput
                   selectRoom={selectRoom}
                   sendMessage={sendMessage}
-                  focusRoom={focusRoom}
+                  activeRoom={activeRoom}
                   nick={nick}
                 />
               </div>
               <div>
-                {channelList[focusRoom] &&
-                  channelList[focusRoom].map(x => <li key={x}>{x}</li>)}
+                {listOfUsersInRoom[activeRoom] &&
+                  listOfUsersInRoom[activeRoom].map(x => <li key={x}>{x}</li>)}
               </div>
             </SplitPane>
           </SplitPane>
         </div>
-      </div>
+        <StatusBar
+          connect={connect}
+          nick={nick}
+          ping={ping}
+          nickWarning={nickWarning}
+          isNickUnique={isNickUnique}
+        />
+      </main>
     );
   }
 }
 
-const mapStoreToProps = ({ chat }: any): IChatState => {
-  const {
-    connect,
-    isNickUnique,
-    nickWarning,
-    nick,
-    id,
-    rooms,
-    focusRoom,
-    ping,
-    userList,
-    channelList
-  } = chat;
-  return {
-    connect,
-    isNickUnique,
-    nickWarning,
-    nick,
-    id,
-    rooms,
-    focusRoom,
-    ping,
-    userList,
-    channelList
-  };
-};
+const mapStoreToProps = ({chatMain}:IStore):IChatState => ({...chatMain});
 
 export default connect(
   mapStoreToProps,

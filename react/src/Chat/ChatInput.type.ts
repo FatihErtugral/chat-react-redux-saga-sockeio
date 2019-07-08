@@ -14,7 +14,7 @@ export interface IChatInputDispatch {
 
 export interface IChatInputOwnProps {
   nick: string;
-  focusRoom: string;
+  activeRoom: string;
   sendMessage: typeof sendMessage;
   selectRoom: typeof selectRoom;
 }

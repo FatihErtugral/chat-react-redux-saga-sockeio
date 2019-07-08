@@ -36,8 +36,8 @@ function connect() {
 function createSocketChannel(socket: SocketIOClient.Socket) {
   return eventChannel(result => {
     const newNickHandler = async (props: IChatState) => {
-      const { nick, isNickUnique, nickWarning } = props;
-      // console.log('EVENT SAGA','newNickHandler: ', nick);
+      const { nick, nickWarning } = props;
+      let isNickUnique = false;
       result({
         type: SET_NICK_SAGA_EVENT,
         payload: { nick, isNickUnique, nickWarning }
@@ -167,7 +167,7 @@ function* watchMessage(socket: SocketIOClient.Socket) {
 
 function* watchPong(socket: SocketIOClient.Socket) {
   yield delay(1000);
-  yield socket.emit('ping')
+  yield socket.emit('ping');
 }
 
 
