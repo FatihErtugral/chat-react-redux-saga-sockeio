@@ -26,10 +26,16 @@ function ChatTextBody(props: IProps) {
     setTxt(text);
   }, [text]);
 
+  // TODO yüksek hızda mesaj geldiğinde scroll istenildiği gibi altta sabit kalması bozuluyor.
   useEffect((): any => {
     if (scrollBott) {
       let x = elementRef.current;
-      x && x.scrollTo(0, x.scrollHeight - x.clientHeight);
+      if(x) {
+        let y = x.scrollHeight;
+        let z = x.clientHeight;
+        x && x.scrollTo(0, (y - z));
+      }
+
     }
   });
 
@@ -38,16 +44,16 @@ function ChatTextBody(props: IProps) {
 
     if (e.target) {
       const { scrollTop, clientHeight, scrollHeight }:any = e.target;
-      if (scrollTop + clientHeight + scrollHeight / 400 >= scrollHeight)
+      if (scrollTop + clientHeight + scrollHeight / 100 >= scrollHeight)
         setscrollBott(true);
       else setscrollBott(false);
     }
   };
 
   return (
-    <div className="chat-text-area">
+    <div id="chat-text-body" className="chat-text-area">
       <div
-        className = "chat-text"
+        id = "chat-text"
         ref={elementRef}
         dangerouslySetInnerHTML={{__html:txt}}
       >

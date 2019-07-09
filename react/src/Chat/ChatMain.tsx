@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sendMessage, selectRoom } from './action';
 import { IChatState, IChatDispatch } from './ChatMain.type';
-import SplitPane from 'react-split-pane';
 
 import ChatInput from './ChatInput';
-import TextBody from './ChatTextBody';
+import ChatTextBody from './ChatTextBody';
 import { IStore } from './reducer';
 import StatusBar from './StatusBar';
 
 type IProps = IChatState & IChatDispatch;
-const stylePane: React.CSSProperties = { overflowX: 'hidden', minHeight: '0' };
 
 class ChatMain extends Component<IProps> {
   render() {
@@ -27,24 +25,16 @@ class ChatMain extends Component<IProps> {
       listOfUsersInRoom
     } = this.props;
 
-    const selectChannel = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const selectChannel = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
       let value = e.currentTarget.getAttribute('data-name') || '';
       selectRoom(value);
     };
     return (
       <main >
 
-        <div className="chat-main-layer">
-          <SplitPane
-            split="vertical"
-            minSize={12}
-            maxSize={200}
-            paneStyle={stylePane}
-            className='test'
-            defaultSize={120}
-            primary="first"
-          >
-            <div className='room-list'>
+        <div id="chat-area-container" className="chat-main-layer area-main">
+          <div id="chat-area-left" className='room-list '>
+            <div id="room-list">
               <div
                 className='room-list-header'
                 role="toolbar"
@@ -54,49 +44,67 @@ class ChatMain extends Component<IProps> {
               >
                 <h5 className="title" title="ODA LİSTESİ">ODA LİSTESİ</h5>
               </div>
-              <div className='room-list-body'>
+              <ul id='room-list-body'>
                 {listOfUsersInRoom &&
                   Object.keys(listOfUsersInRoom).map(key => (
-                      <span
-                        key={key}
-                        className={`room-list-element ${activeRoom === key ? 'active': ''}`}
-                        data-name={key}
-                        onClick={selectChannel}
-                      >
-                        {key}
-                      </span>
+                    <li
+                      key={key}
+                      className={`room-list-element ${activeRoom === key ? 'active' : ''}`}
+                      data-name={key}
+                      onClick={selectChannel}
+                    >
+                      {key}
+                    </li>
                   ))
                 }
-              </div>
+              </ul>
+
+
+
             </div>
-            <SplitPane
-              split="vertical"
-              minSize={12}
-              maxSize={200}
-              paneStyle={stylePane}
-              defaultSize={120}
-              primary="second"
-            >
-              <div>
-                <TextBody
-                  text={
-                    (rooms && rooms[activeRoom] && rooms[activeRoom].message) ||
-                    ''
-                  }
-                />
-                <ChatInput
-                  selectRoom={selectRoom}
-                  sendMessage={sendMessage}
-                  activeRoom={activeRoom}
-                  nick={nick}
-                />
+            <div id="user-list">
+              <div id="user-list-header">
+              <h5>Kişi Listesi</h5>
               </div>
-              <div>
+              <ul id="user-list-body">
+
+
                 {listOfUsersInRoom[activeRoom] &&
-                  listOfUsersInRoom[activeRoom].map(x => <li key={x}>{x}</li>)}
+                  listOfUsersInRoom[activeRoom].map(x =>
+                    <li className="user-list-element" key={x}>{x}</li>)
+                }
+              </ul>
+            </div>
+          </div>
+          <div id="chat-area-mid">
+            <ChatTextBody
+              text={
+                (rooms && rooms[activeRoom] && rooms[activeRoom].message) ||
+                ''
+              }
+            />
+            <ChatInput
+              selectRoom={selectRoom}
+              sendMessage={sendMessage}
+              activeRoom={activeRoom}
+              nick={nick}
+            />
+          </div>
+          <div id="chat-area-right" className="">
+            <div id="user-list">
+              <div id="user-list-header">
+              <h5>Kişi Listesi</h5>
               </div>
-            </SplitPane>
-          </SplitPane>
+              <ul id="user-list-body">
+
+
+                {listOfUsersInRoom[activeRoom] &&
+                  listOfUsersInRoom[activeRoom].map(x =>
+                    <li className="user-list-element" key={x}>{x}</li>)
+                }
+              </ul>
+            </div>
+          </div>
         </div>
         <StatusBar
           connect={connect}
@@ -110,7 +118,7 @@ class ChatMain extends Component<IProps> {
   }
 }
 
-const mapStoreToProps = ({chatMain}:IStore):IChatState => ({...chatMain});
+const mapStoreToProps = ({ chatMain }: IStore): IChatState => ({ ...chatMain });
 
 export default connect(
   mapStoreToProps,

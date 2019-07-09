@@ -73,12 +73,19 @@ function ChatInput(props: IProps) {
   };
 
   return (
+    <div id="chat-input-container">
+    <label htmlFor="chat-text-input"
+      style={{color:'transparent', position:'absolute', zIndex:-1}}
+      >Chat input</label>
     <input
-      name="chat-text-input"
+      name="Chat text input"
+      type="text"
       onKeyDown={onEnterKey}
       id="chat-text-input"
     />
+    </div>
   );
+
 }
 
 const mapStoreToProps = ({ chatInput }: IStore, ownProps: IChatInputOwnProps):IChatInputOwnProps => ({ ...ownProps });
