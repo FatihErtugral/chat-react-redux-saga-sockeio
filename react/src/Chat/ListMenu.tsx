@@ -1,18 +1,20 @@
 import React from 'react';
-
+import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function ListMenu(props: any) {
   const { listOfUsersInRoom, activeRoom, selectChannel, visible } = props;
 
   return (
-    <div id="chat-area-left" className={visible ? 'toggle': ''}>
+    <div id="chat-area-left" className={visible ? 'toggle' : ''}>
 
       <div id="room-list">
         <div
           className='room-list-header'
           role="toolbar"
         >
-          <h5 className="title" title="ODA LİSTESİ">ODA LİSTESİ</h5>
+          <FontAwesomeIcon icon={faCaretDown}/>
+          <h5 className="title" title="Oda Listesi">ODA LİSTESİ</h5>
         </div>
 
         <ul id='room-list-body'>
@@ -32,7 +34,8 @@ export function ListMenu(props: any) {
       </div>
       <div id="user-list">
         <div id="user-list-header">
-          <h5>Kişi Listesi</h5>
+          <FontAwesomeIcon icon={faCaretRight} />
+          <h5 className="title" title="Kişi Listesi">Kişi Listesi</h5>
         </div>
         <ul id="user-list-body">
           {listOfUsersInRoom && listOfUsersInRoom[activeRoom] &&

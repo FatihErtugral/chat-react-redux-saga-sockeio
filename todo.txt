@@ -1,0 +1,14 @@
+# gönder butonunun metodu yazılacak
+# mobil için scroll inceltilecek
+# ping, nick bilgileri status bara yerleştirilcek
+# kişi nicki özel renkte olucak
+# kişinin girdiği kanal adı, listede scroll varsa üste kaydırılcak
+# listeler kendi içlerin açılıp kapanıcak
+# listedeki kanal isimlerinin # işareti beyaz olucak
+# nick ve kanal ismi uzunluğu sınırlandırılacak
+# scroll'un stabilliği üzerine algoritma yeniden çıkartılcak
+# liste genişliği masaüstü ve mobil için ayrı ayrı ayarlanıcak
+# özel mesajlar için reducer yazılacak
+# kişi listesinden birine çift tıklandığında otomatik özel bölümünde açılıp focuslanıcak
+# mobilde listeye dokunduğunda scroll algılama süresi biraz uzun düzeltimeye çalışılcak
+# sadece yazan kişinin kanal geneline yazılan mesaj rengi farklı olabilir, denenicek.

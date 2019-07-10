@@ -25,7 +25,7 @@ const initStateChatSystem: IChatState = {
   rooms: {},
   activeRoom: '',
   connect: 'Disconnected',
-  visibleList: false
+  visibleList: true
 };
 
 export function ChatSystemReducer(
@@ -74,8 +74,7 @@ export function ChatSystemReducer(
         rooms[roomName] = { message: '' };
       else rooms[roomName] = state.rooms[roomName];
 
-      rooms[roomName].message += `<p><a><strong style="color:rgb(78, 201, 176)
-      ; ">${nick}:</strong></a> ${message}</p>`;
+      rooms[roomName].message += `<p><a><strong class="nick">${nick}:</strong></a> ${message}</p>`;
 
       if (rooms[roomName].message.length > maxString) {
         rooms[roomName].message = rooms[roomName].message.substr(

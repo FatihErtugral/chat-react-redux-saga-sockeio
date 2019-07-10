@@ -8,6 +8,8 @@ import {
 } from './ChatInput.type';
 import { IMessageDetail } from './ChatMain.type';
 import { IStore } from './reducer';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type IProps = IChatInputState & IChatInputDispatch & IChatInputOwnProps;
 
@@ -82,7 +84,11 @@ function ChatInput(props: IProps) {
       type="text"
       onKeyDown={onEnterKey}
       id="chat-text-input"
+      placeholder="Bir mesaj yaz"
     />
+    <button id="send-button">
+      <FontAwesomeIcon icon={faPaperPlane} size="lg"/>
+    </button>
     </div>
   );
 

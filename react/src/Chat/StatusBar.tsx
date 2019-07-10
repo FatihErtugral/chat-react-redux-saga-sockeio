@@ -1,5 +1,5 @@
 import React from 'react';
-import { faListAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDoubleRight, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -15,10 +15,11 @@ export default function StatusBar(props: any) {
    return (
       <div id="statusbar" >
          <div className="toggle-menu" onClick={handleMenu}>
-            <FontAwesomeIcon icon={faListAlt} size="3x" />
+            {/* <FontAwesomeIcon icon={faAngleDoubleRight} size="2x" /> */}
+            <FontAwesomeIcon icon={faAngleDoubleLeft} size="2x" />
          </div>
-
-         <div className="statusbar-item">
+         <div className="statusbar-item"><h3>#Istanbul</h3></div>
+         {/* <div className="statusbar-item">
             <small>
                <div>Nick: {nick}</div>
                <div>Ping: {ping}ms</div>
@@ -35,8 +36,8 @@ export default function StatusBar(props: any) {
                   </span>
                </div>
             </small>
-         </div>
-         <div className="statusbar-item"><h2>#İstanbul</h2></div>
+         </div> */}
+
          {/* <div className="statusbar-item">{isNickUnique ? '' : nickWarning}</div> */}
 
       </div>

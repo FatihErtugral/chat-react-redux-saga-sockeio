@@ -105,13 +105,14 @@ const initializeSocketIO = (server) => {
    });
 
    // Performnas testi için yapay mesajlar
+
    let i = 0;
    setInterval(() => {
-      io.in('performans').emit('message', { message: TestMsj[i], nick: TestNick[i], roomName: 'performans' });
+      io.in('#performans').emit('message', { message: TestMsj[i], nick: TestNick[i], roomName: '#performans' });
       i++;
       if (i == 4) i = 0;
 
-   }, 560);
+   }, 1060);
 }
 
 module.exports = initializeSocketIO;

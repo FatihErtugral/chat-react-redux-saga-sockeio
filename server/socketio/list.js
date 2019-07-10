@@ -1,10 +1,10 @@
 const rooms = [
-  'performans',  'istanbul',
-  'antalya',     'izmir',    'terkidağ', 'almanya',  'türkiye',  'muğla',
-  'çanakkale',   'nodejs',   'react',    'redux',    'angular',  'google',
-  'devoloper',   'karadeniz','rize',     'zonguldak','adana',    'balıkesir',
-  'sakarya',     'amerika',  'avusturya','fransa',   'paris',    'mars',
-  'mekan',       'jüpiter',  'nebula',   'kuasar',   'blazar',   'ankara',
+  '#performans',  '#istanbul',
+  '#antalya',     '#izmir',    '#terkidağ', '#almanya',  '#türkiye',  '#muğla',
+  '#çanakkale',   '#nodejs',   '#react',    '#redux',    '#angular',  '#google',
+  '#devoloper',   '#karadeniz','#rize',     '#zonguldak','#adana',    '#balıkesir',
+  '#sakarya',     '#amerika',  '#avusturya','#fransa',   '#paris',    '#mars',
+  '#mekan',       '#jüpiter',  '#nebula',   '#kuasar',   '#blazar',   '#ankara',
 ];
 
 
