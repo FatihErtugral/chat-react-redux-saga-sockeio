@@ -10,7 +10,8 @@ import {
   MESSAGE_SAGA_EVENT,
   ROOM_USER_LIST_SAGA_EVENT,
   PING_SAGA_WATCH,
-  CONNECT_SAGA_PUT
+  CONNECT_SAGA_PUT,
+  VISIBLE_LIST
 } from './constants';
 
 const initStateChatSystem: IChatState = {
@@ -24,6 +25,7 @@ const initStateChatSystem: IChatState = {
   rooms: {},
   activeRoom: '',
   connect: 'Disconnected',
+  visibleList: false
 };
 
 export function ChatSystemReducer(
@@ -33,6 +35,11 @@ export function ChatSystemReducer(
   //console.log('ChatSystemReducer', state, action);
   const newState = Object.assign({}, state);
   switch (action.type) {
+
+    case VISIBLE_LIST:
+      newState.visibleList = !newState.visibleList
+      return newState;
+
     case PING_SAGA_WATCH:
       newState.ping = action.payload
       return newState;

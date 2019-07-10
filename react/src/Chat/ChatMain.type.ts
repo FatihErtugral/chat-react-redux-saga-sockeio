@@ -1,4 +1,4 @@
-import { sendMessage, selectRoom } from './action';
+import { sendMessage, selectRoom, toggleList } from './action';
 
 export interface IMessageDetail {
   roomName: string;
@@ -22,10 +22,12 @@ export interface IChatState {
     };
   };
   activeRoom: string;
+  visibleList: boolean;
   connect: 'Connected' | 'Disconnected';
 }
 
 export interface IChatDispatch {
   sendMessage: typeof sendMessage;
   selectRoom: typeof selectRoom;
+  toggleList: typeof toggleList;
 }

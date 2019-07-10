@@ -4,7 +4,8 @@ import {
   JOIN_ROOM_SAGA_WATCH,
   LEAVE_ROOM_SAGA_WATCH,
   SELECT_ROOM,
-  MESSAGE_SAGA_WATCH
+  MESSAGE_SAGA_WATCH,
+  VISIBLE_LIST
 } from './constants';
 import { IMessageDetail } from './ChatMain.type';
 
@@ -41,5 +42,11 @@ export function sendMessage(message: IMessageDetail): IChatActionTypes {
   return {
     type: MESSAGE_SAGA_WATCH,
     payload: message
+  };
+}
+
+export function toggleList(): IChatActionTypes {
+  return {
+    type: VISIBLE_LIST,
   };
 }

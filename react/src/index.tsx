@@ -1,6 +1,7 @@
 import './index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import saga from 'redux-saga';
@@ -27,3 +28,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+serviceWorker.unregister();

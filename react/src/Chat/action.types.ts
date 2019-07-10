@@ -11,7 +11,8 @@ import {
   SELECT_ROOM,
   ROOM_USER_LIST_SAGA_EVENT,
   PING_SAGA_WATCH,
-  CONNECT_SAGA_PUT
+  CONNECT_SAGA_PUT,
+  VISIBLE_LIST
 } from './constants';
 import { IMessageDetail } from './ChatMain.type';
 
@@ -56,6 +57,9 @@ interface IConnect extends Action {
   payload: 'Connected' | 'Disconnected';
 }
 
+interface IToggleList extends Action {
+  type: typeof VISIBLE_LIST;
+}
 
 export type IChatActionTypes =
   | IJoinRoomAction
@@ -66,5 +70,6 @@ export type IChatActionTypes =
   | INewNickAction
   | ISelectRoomAction
   | IPingAction
-  | IConnect;
+  | IConnect
+  | IToggleList;
 export type IChatInputActionTypes = Action;

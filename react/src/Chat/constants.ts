@@ -14,3 +14,4 @@ export const RECONNECT = 'RECONNECT';
 
 
 export const SELECT_ROOM = 'SELECT_ROOM';
+export const VISIBLE_LIST = 'VISIBLE_LIST';

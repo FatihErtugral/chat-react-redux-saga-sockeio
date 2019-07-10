@@ -17,7 +17,7 @@ body {
    background-color: #333333;
 }
 
-/*#region SCROLL BAR BEGIN */
+//#region SCROLL BAR BEGIN
 ::-webkit-scrollbar {
    width: 10px;
    height: 10px;
@@ -40,6 +40,7 @@ body {
 ::-webkit-scrollbar-thumb:active {
    background: #ffffff95;
 }
+//#endregion SCROLL BAR END
 
 main {
    display: flex;
@@ -54,10 +55,15 @@ main {
 
       #chat-area-left {
          // display: none;
-         width: 100%;
+         width: 0%;
          height: 100%;
          display: flex;
          flex-direction: column;
+         transition: width .5s;
+
+         &.toggle{
+            width: 50%;
+         }
       }
 
       #chat-area-mid {
@@ -112,40 +118,53 @@ main {
          }
 
       }
-
-      #chat-area-right {
-         position: relative;
-         max-width: 0;
-         display: none;
-      }
    }
 
    #statusbar {
-      $statusbar-heigt: 24px;
+      $statusbar-heigt: 54px;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       height: $statusbar-heigt;
       width: 100%;
-      background-color: rgb(0, 122, 204);
-      // background-color: #eeeeee;
-      // color: #1e1e1e;
-      // background-color: darkslategray;
-      color: rgb(255, 255, 255);
+
+      background-color: #eeeeee;
+      color: #1e1e1e;
+      // background-color: rgb(0, 122, 204);
+      // color: rgb(255, 255, 255);
       cursor: default;
       font-size: 13px;
       font-weight: bold;
       user-select: none;
 
+      .toggle-menu{
+         // background: black;
+         padding: 0 0 0 10px!important;
+         cursor: pointer;
+         margin: auto 0;
+         &:active{
+            color: yellowgreen;
+         }
+      }
       .statusbar-item {
-         line-height: $statusbar-heigt;
+         text-align: justify;
+         // line-height: $statusbar-heigt;
+         // background: red;
+         // border: 1px solid blueviolet;
+         line-height: 14px;
+         width: 130px;
          padding: 0 20px;
-
+         margin: auto 0;
+         overflow: hidden;
          #connect {
             position: relative;
 
             #ex-circle {
                position: absolute;
                display: inline-block;
-               height: 12px;
-               width: 12px;
+               height: 8px;
+               width: 8px;
                top: 0;
                bottom: 0;
                margin: auto;
@@ -154,8 +173,8 @@ main {
 
                #circle {
                   position: absolute;
-                  height: 8px;
-                  width: 8px;
+                  height: 6px;
+                  width: 6px;
                   border-radius: 50%;
                   left: 0;
                   right: 0;
@@ -222,8 +241,8 @@ $header-height: 22px;
    white-space: nowrap;
 
    &.active {
-      background-color: rgb(115, 115, 126);
-      color: yellow;
+      background-color: #53535A;
+      color: #ffff00;
       /* background-color: red; */
    }
 
@@ -276,7 +295,7 @@ $header-height: 22px;
 
       .user-list-element {
          @extend %list-element;
-         color: darkcyan;
+         color: #00C5C7;
       }
    }
 }
